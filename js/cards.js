@@ -37,7 +37,13 @@ export function searchCards(cards, term) {
  * Exemple : filterByType(cards, "Eau") → [Tidalix, Reefling, Aquaphin]
  */
 export function filterByType(cards, type) {
-  
+  // TODO
+  if (type === "Tous") {
+    return cards
+  } else {
+    return cards.filter((elm) =>
+      elm.type === type)
+  }
   return [];
 }
 

@@ -34,8 +34,8 @@ function refresh() {
   ui.renderTypes(dataCards.countByType(state.cards), state.filters.type);
   ui.renderCount(visible.length);
   ui.renderGrid(visible, state.cart);
-  ui.renderGrid(dataCards.searchCards(state.cards, searchInput.value), state.cart)
-  
+  // ui.renderGrid(dataCards.searchCards(state.cards, searchInput.value), state.cart)
+  ui.renderGrid(dataCards.filterByType(state.cards, state.filters.type), state.cart)
   ui.renderCart(state.cart, state.cards, dataCart.cartTotal(state.cart, state.cards), dataCart.cartCount(state.cart));
   ui.renderStats(dataCards.getStats(visible));
 }
@@ -54,7 +54,15 @@ searchInput.addEventListener("input", () => {
 
 // Types : UN SEUL écouteur sur #types (délégation)
 typesBox.addEventListener("click", (event) => {
-  
+  // TODO 1. Retrouvez le bouton cliqué : event.target.closest("[data-type]")
+  let btn = event.target.closest("[data-type]");
+  // TODO 2. Si on a cliqué à côté d'un bouton, on s'arrête (return)
+  if (!btn) {
+    return;
+  }
+  // TODO 3. state.filters.type = bouton.dataset.type ; refresh()
+  state.filters.type = bouton.dataset.type;
+  refresh();
 });
 
 // Grille : UN SEUL écouteur sur #grid (délégation)
