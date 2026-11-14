@@ -18,9 +18,18 @@
  */
 export function searchCards(cards, term) {
   // TODO 1. Nettoyez le terme : trim() puis toLowerCase()
+  const str = term.toLowerCase().trim();
   // TODO 2. Si le terme est vide, renvoyez une copie de cards
+  if (str === "") {
+    return [...cards]
+  }
   // TODO 3. Sinon, renvoyez cards.filter(...) : le nom en minuscules contient-il le terme ?
-  return [];
+  else {
+    return cards.filter((elem) =>
+      elem.nom.toLowerCase().includes(str)
+    )
+  }
+  // return [];
 }
 
 /**
@@ -28,7 +37,7 @@ export function searchCards(cards, term) {
  * Exemple : filterByType(cards, "Eau") → [Tidalix, Reefling, Aquaphin]
  */
 export function filterByType(cards, type) {
-  // TODO
+  
   return [];
 }
 

@@ -31,10 +31,11 @@ const form = document.querySelector("#card-form");
 function refresh() {
   let visible = dataCards.getVisibleCards(state.cards, state.filters);
   visible = dataCards.sortCards(visible, state.sort);
-
   ui.renderTypes(dataCards.countByType(state.cards), state.filters.type);
   ui.renderCount(visible.length);
   ui.renderGrid(visible, state.cart);
+  ui.renderGrid(dataCards.searchCards(state.cards, searchInput.value), state.cart)
+  
   ui.renderCart(state.cart, state.cards, dataCart.cartTotal(state.cart, state.cards), dataCart.cartCount(state.cart));
   ui.renderStats(dataCards.getStats(visible));
 }
@@ -46,13 +47,14 @@ function refresh() {
 // Recherche : à chaque frappe
 searchInput.addEventListener("input", () => {
   // TODO : mettez à jour state.filters.term avec la valeur du champ, puis refresh()
+  state.filters.term = searchInput.value;
+  refresh()
+
 });
 
 // Types : UN SEUL écouteur sur #types (délégation)
 typesBox.addEventListener("click", (event) => {
-  // TODO 1. Retrouvez le bouton cliqué : event.target.closest("[data-type]")
-  // TODO 2. Si on a cliqué à côté d'un bouton, on s'arrête (return)
-  // TODO 3. state.filters.type = bouton.dataset.type ; refresh()
+  
 });
 
 // Grille : UN SEUL écouteur sur #grid (délégation)
