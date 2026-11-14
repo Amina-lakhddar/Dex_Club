@@ -79,8 +79,64 @@ export function renderCount(n) {
  */
 export function renderGrid(list, cart) {
   // TODO 1. Videz #grid
+  grid.innerHTML="";
   // TODO 2. Liste vide : ajoutez le message et arrêtez (return)
+  if(list.length===0){
+    let message_erreur=document.createElement("p");
+    message_erreur.textContent="Aucune carte trouvée";
+    message_erreur.classList.add("empty");
+    grid.append(message_erreur);
+    return;
+  }
   // TODO 3. Pour chaque carte : créez l'article et ses enfants, puis grid.append(article)
+  list.map((item)=>{  let article=document.createElement("article");
+
+
+    let image=document.createElement("img");
+    image.classList.add("card__img");
+    image.src=item.image;
+    image.alt=item.nom;
+
+
+
+    let card__num=document.createElement("p");
+    card__num.classList.add("card__num");
+    card__num.textContent=item.id;
+
+    let card__name=document.createElement("h3");
+    card__name.classList.add("card__name");
+    card__name.textContent=item.nom;
+
+
+    let card__meta=document.createElement("p");
+    card__meta.classList.add("card__meta");
+
+
+    let type=document.createElement("span");
+    type.classList.add("badge", "type-feu");
+    type.textContent=item.type;
+
+    let rarity=document.createElement("span");
+    rarity.classList.add("rarity");
+    rarity.textContent=item.rarete;
+
+
+    card__meta.append(type);
+    card__meta.append(rarity);
+
+    let btn_ajouter=document.createElement("button");
+    btn_ajouter.classList.add("btn","btn--primary");
+    btn_ajouter.type="button";
+    btn_ajouter.dataset.add="1";
+    btn_ajouter.textContent="Ajouter";
+
+
+    article.append(image, card__num, card__name, card__meta, btn_ajouter);
+    grid.append(article);
+    // return article;
+    // console.log(article)
+    return grid
+  })
 }
 
 /**
