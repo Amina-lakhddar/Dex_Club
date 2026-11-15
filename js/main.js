@@ -31,11 +31,10 @@ const form = document.querySelector("#card-form");
 function refresh() {
   let visible = dataCards.getVisibleCards(state.cards, state.filters);
   visible = dataCards.sortCards(visible, state.sort);
+  console.log(visible)
   ui.renderTypes(dataCards.countByType(state.cards), state.filters.type);
   ui.renderCount(visible.length);
   ui.renderGrid(visible, state.cart);
-  // ui.renderGrid(dataCards.searchCards(state.cards, searchInput.value), state.cart)
-  ui.renderGrid(dataCards.filterByType(state.cards, state.filters.type), state.cart)
   ui.renderCart(state.cart, state.cards, dataCart.cartTotal(state.cart, state.cards), dataCart.cartCount(state.cart));
   ui.renderStats(dataCards.getStats(visible));
 }
@@ -75,8 +74,17 @@ grid.addEventListener("click", (event) => {
 
   // PALIER 1 — fiche de la carte :
   // TODO 1. const cardEl = event.target.closest(".card") ; si rien, return
+  const cardEl=event.target.closest(".card");
+  if(!cardEl){
+    return;
+  }
   // TODO 2. Retrouvez la carte avec dataCart.findCard(state.cards, Number(cardEl.dataset.id))
+  const carte=dataCart.findCard(state.cards, Number(cardEl.dataset.id));
+  if(!carte){
+    return;
+  }
   // TODO 3. ui.renderDetail(carte)
+  ui.renderDetail(carte);
 });
 
 // =============================================================
