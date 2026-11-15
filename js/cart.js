@@ -11,7 +11,13 @@
  */
 export function findCard(cards, id) {
   // TODO : cards.find(...)
-  return undefined;
+  let carte=cards.find(card=>
+    card.id===id
+  )
+  if(!carte){
+    return undefined;
+  }
+  return carte;
 }
 
 /**
