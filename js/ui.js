@@ -50,31 +50,31 @@ export function el(tag, className = "", text = "") {
  */
 export function renderTypes(counts, activeType) {
   // TODO 1. Videz #types
-  typesBox.innerHTML="";
+  typesBox.innerHTML = "";
   // TODO 2. Créez le bouton « Tous (…) »
-  let btn_tous=document.createElement("button");
+  let btn_tous = document.createElement("button");
   btn_tous.classList.add("type-btn");
-  if(activeType==="Tous"){
+  if (activeType === "Tous") {
     btn_tous.classList.add("is-active");
   }
-  btn_tous.type="button";
-  btn_tous.dataset.type="Tous";
-  const total=Object.values(counts).reduce((acc,val)=>
-    {
-      return acc+val
-      l},0)
-  btn_tous.textContent=`Tous (${total}))`;
+  btn_tous.type = "button";
+  btn_tous.dataset.type = "Tous";
+  const total = Object.values(counts).reduce((acc, val) => {
+    return acc + val
+    l
+  }, 0)
+  btn_tous.textContent = `Tous (${total}))`;
   typesBox.append(btn_tous);
   // TODO 3. Pour chaque type de counts (for...in ou Object.keys), créez un bouton
-  for(const type in counts){
-    let btn_type=document.createElement("button");
+  for (const type in counts) {
+    let btn_type = document.createElement("button");
     btn_type.classList.add("type-btn");
-    if(type===activeType){
+    if (type === activeType) {
       btn_type.classList.add("is-active");
     }
-    btn_type.type="button";
-    btn_type.dataset.type=type;
-    btn_type.textContent=`${type} (${counts[type]})`;
+    btn_type.type = "button";
+    btn_type.dataset.type = type;
+    btn_type.textContent = `${type} (${counts[type]})`;
     typesBox.append(btn_type);
   }
 }
@@ -104,63 +104,64 @@ export function renderCount(n) {
  */
 export function renderGrid(list, cart) {
   // TODO 1. Videz #grid
-  grid.innerHTML="";
+  grid.innerHTML = "";
   // TODO 2. Liste vide : ajoutez le message et arrêtez (return)
-  if(list.length===0){
-    let message_erreur=document.createElement("p");
-    message_erreur.textContent="Aucune carte trouvée";
+  if (list.length === 0) {
+    let message_erreur = document.createElement("p");
+    message_erreur.textContent = "Aucune carte trouvée";
     message_erreur.classList.add("empty");
     grid.append(message_erreur);
     return;
   }
   // TODO 3. Pour chaque carte : créez l'article et ses enfants, puis grid.append(article)
-  list.map((item)=>{  let article=document.createElement("article");
+  list.map((item) => {
+    let article = document.createElement("article");
 
 
-    let image=document.createElement("img");
+    let image = document.createElement("img");
     image.classList.add("card__img");
-    image.src=item.image;
-    image.alt=item.nom;
+    image.src = item.image;
+    image.alt = item.nom;
 
 
 
-    let card__num=document.createElement("p");
+    let card__num = document.createElement("p");
     card__num.classList.add("card__num");
-    card__num.textContent=item.id;
+    card__num.textContent = item.id;
 
-    let card__name=document.createElement("h3");
+    let card__name = document.createElement("h3");
     card__name.classList.add("card__name");
-    card__name.textContent=item.nom;
+    card__name.textContent = item.nom;
 
 
-    let card__meta=document.createElement("p");
+    let card__meta = document.createElement("p");
     card__meta.classList.add("card__meta");
 
 
-    let type=document.createElement("span");
+    let type = document.createElement("span");
     type.classList.add("badge", "type-feu");
-    type.textContent=item.type;
+    type.textContent = item.type;
 
-    let rarity=document.createElement("span");
+    let rarity = document.createElement("span");
     rarity.classList.add("rarity");
-    rarity.textContent=item.rarete;
+    rarity.textContent = item.rarete;
 
 
     card__meta.append(type);
     card__meta.append(rarity);
 
-    let btn_ajouter=document.createElement("button");
-    btn_ajouter.classList.add("btn","btn--primary");
-    btn_ajouter.type="button";
-    btn_ajouter.dataset.add="1";
-    btn_ajouter.textContent="Ajouter";
+    let btn_ajouter = document.createElement("button");
+    btn_ajouter.classList.add("btn", "btn--primary");
+    btn_ajouter.type = "button";
+    btn_ajouter.dataset.add = item.id;
+    btn_ajouter.textContent = "Ajouter";
 
 
     article.append(image, card__num, card__name, card__meta, btn_ajouter);
     grid.append(article);
     // return article;
     // console.log(article)
-    return grid
+
   })
 }
 
@@ -170,6 +171,56 @@ export function renderGrid(list, cart) {
  */
 export function renderDetail(card) {
   // TODO
+  detail.innerHTML = "";
+
+  let image = document.createElement("img");
+  image.src = card.image;
+
+
+  let nom = document.createElement("h3");
+  nom.textContent = card.nom;
+
+  let numero = document.createElement("p");
+  type.textContent =card.numero;
+
+  let type =document.createElement("span");
+  type.textContent=card.type;
+
+  let description=document.createElement("p");
+  description.textContent=card.description;
+
+  let liste=document.createElement("dl");
+
+  // rareté
+  let dt_rarete=document.createElement("dt");
+  dt_rarte.textContent="Rareté";
+
+  let dd_rarete=document.createElement("dd");
+  dd_rarete.textContent=card.rarete;
+
+  //prix
+  let dt_prix=document.createElement("dt");
+  dt_prix.textContent="Prix";
+
+  let dd_prix=document.createElement("dd");
+  dd_prix.textContent=card.prix
+
+  // Stock
+    let dt_stock = document.createElement("dt");
+    dt_stock.textContent = "Stock";
+
+    let dd_stock = document.createElement("dd");
+
+    if (card.stock === 0) {
+        dd_stock.textContent = "Rupture";
+    } else {
+        dd_stock.textContent = card.stock;
+    }
+
+
+    liste.append(dt_rarete, dd_rarete, dt_prix, dd_prix, dt_stock, dd_stock);
+
+    detail.append(image, nom, numero, type, description, liste);
 }
 
 // -------------------------------------------------------------
