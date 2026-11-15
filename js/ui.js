@@ -116,6 +116,8 @@ export function renderGrid(list, cart) {
   // TODO 3. Pour chaque carte : créez l'article et ses enfants, puis grid.append(article)
   list.map((item) => {
     let article = document.createElement("article");
+    article.classList.add("card");
+    article.dataset.id=item.id;
 
 
     let image = document.createElement("img");
@@ -181,7 +183,7 @@ export function renderDetail(card) {
   nom.textContent = card.nom;
 
   let numero = document.createElement("p");
-  type.textContent =card.numero;
+  numero.textContent =card.numero;
 
   let type =document.createElement("span");
   type.textContent=card.type;
@@ -193,7 +195,7 @@ export function renderDetail(card) {
 
   // rareté
   let dt_rarete=document.createElement("dt");
-  dt_rarte.textContent="Rareté";
+  dt_rarete.textContent="Rareté";
 
   let dd_rarete=document.createElement("dd");
   dd_rarete.textContent=card.rarete;
